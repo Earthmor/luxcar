@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include head.ejs %>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <% include navigation.ejs %>
+    </div>
+</nav>
+<div class="container">
+    <%- body %>
+</div>
+<script src="/js/jquery.min.js"></script>
+<script src="/bootstrap/js/moment-with-locales.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/bootstrap/js/bootstrap-formhelpers.min.js"></script>
+<script src="/js/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<% layout('boilerplate') -%>
+<h3>Заявка на эвакуацию</h3>
+<p>
+    Онлайн заявка на эвакуацию автомобиля позволит вам сэкономить время.
+    Это удобный способ быстро получить квалифицированную помощь специалистов.
+    Задайте интересующие вас вопросы, связанные с перевозкой автомобиля, и мы с удовольствием поможем вам решить
+    возникшие проблемы.
+</p>
+<p>Заполните форму на сайте, наши специалисты свяжутся с вами для подтверждения оформления заказа.</p>
+<form class="form-horizontal" method="post">
+    <fieldset>
+        <legend></legend>
+        <div class="form-group <%= Validator.hasErrors('mark') ? 'has-error' : '' %>">
+            <label for="inputMark" class="col-lg-3 control-label">Марка транспортного средства</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control <%= Validator.hasErrors('mark') ? 'red-tooltip' : '' %>"
+                       name="mark" id="inputMark" placeholder="Марка транспортного средства"
+                       value="<%= Validator.getValue('mark') %>" data-toggle="tooltip" data-placement="bottom" title=""
+                       data-original-title="<%=Validator.hasErrors('mark') ? Validator.getFieldErrors('mark') : '' %>"
+                >
+            </div>
+        </div>
+        <div class="form-group <%= Validator.hasErrors('weight') ? 'has-error' : '' %>">
+            <label for="inputWeight" class="col-lg-3 control-label">Вес автотранспортного средства</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control <%= Validator.hasErrors('weight') ? 'red-tooltip' : '' %>"
+                       name="weight" id="inputWeight" placeholder="Вес автотранспортного средства"
+                       value="<%= Validator.getValue('weight') %>" data-toggle="tooltip" data-placement="bottom" title=""
+                       data-original-title="<%=Validator.hasErrors('weight') ? Validator.getFieldErrors('weight') : ''%>">
+            </div>
+        </div>
+        <div class="form-group <%= Validator.hasErrors('from') ? 'has-error' : '' %>">
+            <label for="inputFrom" class="col-lg-3 control-label">Откуда</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control <%= Validator.hasErrors('from') ? 'red-tooltip' : '' %>"
+                       name="from" id="inputFrom" placeholder="Откуда"
+                       value="<%= Validator.getValue('from') %>" data-toggle="tooltip" data-placement="bottom" title=""
+                       data-original-title="<%=Validator.hasErrors('from') ? Validator.getFieldErrors('from') : ''%>">
+            </div>
+        </div>
+        <div class="form-group <%= Validator.hasErrors('to') ? 'has-error' : '' %>">
+            <label for="inputTo" class="col-lg-3 control-label">Куда</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control <%= Validator.hasErrors('to') ? 'red-tooltip' : '' %>"
+                       name="to" id="inputTo" placeholder="Куда"
+                       value="<%= Validator.getValue('to') %>" data-toggle="tooltip" data-placement="bottom" title=""
+                       data-original-title="<%=Validator.hasErrors('to') ? Validator.getFieldErrors('to') : ''%>">
+            </div>
+        </div>
+        <div class="form-group <%= Validator.hasErrors('dateCarriage') ? 'has-error' : '' %>">
+            <label for="dateCarriage" class="col-lg-3 control-label">Дата перевозки</label>
+            <div style="padding-left: 15px; padding-right: 15px" class='input-group date' id='dateCarriage'>
+                <input type='text' class="form-control <%= Validator.hasErrors('dateCarriage') ? 'red-tooltip' : '' %>"
+                       name="dateCarriage" placeholder="Дата перевозки"
+                       value="<%= Validator.getValue('dateCarriage') %>" data-toggle="tooltip" data-placement="bottom" title=""
+                       data-original-title="<%=Validator.hasErrors('dateCarriage') ? Validator.getFieldErrors('dateCarriage') : ''%>">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group <%= Validator.hasErrors('fio') ? 'has-error' : '' %>">
+            <label for="inputFIO" class="col-lg-3 control-label">ФИО</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control <%= Validator.hasErrors('fio') ? 'red-tooltip' : '' %>"
+                       name="fio" id="inputFIO" placeholder="Фамилия Имя Отчество"
+                       value="<%= Validator.getValue('fio') %>" data-toggle="tooltip" data-placement="bottom" title=""
+                       data-original-title="<%=Validator.hasErrors('fio') ? Validator.getFieldErrors('fio') : ''%>">
+            </div>
+        </div>
+        <div class="form-group <%= Validator.hasErrors('phone') ? 'has-error' : '' %>">
+            <label for="inputPhone" class="col-lg-3 control-label">Телефон</label>
+            <div class="col-lg-9">
+                <input id="inputPhone" type="text"
+                       name="phone" class="form-control bfh-phone <%= Validator.hasErrors('phone') ? 'red-tooltip' : '' %>"
+                       data-format="+7 (ddd) ddd-dddd" placeholder="Телефон"
+                       value="<%= Validator.getValue('phone') %>" data-toggle="tooltip" data-placement="bottom" title=""
+                       data-original-title="<%=Validator.hasErrors('phone') ? Validator.getFieldErrors('phone') : ''%>">
+            </div>
+        </div>
+        <div class="form-group <%= Validator.hasErrors('email') ? 'has-error' : '' %>">
+            <label for="inputEmail" class="col-lg-3 control-label">Email</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control <%= Validator.hasErrors('email') ? 'red-tooltip' : '' %>"
+                       name="email" id="inputEmail" placeholder="Email"
+                       value="<%= Validator.getValue('email') %>" data-toggle="tooltip" data-placement="bottom" title=""
+                       data-original-title="<%=Validator.hasErrors('email') ? Validator.getFieldErrors('email') : ''%>">
+            </div>
+        </div>
+        <div class="form-group <%= Validator.hasErrors('optionsPriority') ? 'has-error' : '' %>">
+            <label class="col-lg-3 control-label">Приоритет</label>
+            <div class="col-lg-9">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsPriority" id="priorityLow" value="low" checked="">
+                        Время терпит
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsPriority" id="priorityMiddle" value="middle">
+                        Срочно
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsPriority" id="priorityHigh" value="high">
+                        Очень срочно
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group <%= Validator.hasErrors('comment') ? 'has-error' : '' %>">
+            <label for="comment" class="col-lg-3 control-label">Особенности Вашей перевозки</label>
+            <div class="col-lg-9">
+                <textarea class="form-control <%= Validator.hasErrors('comment') ? 'red-tooltip' : '' %>" rows="3" name="comment" id="comment"
+                          data-toggle="tooltip" data-placement="bottom" title=""
+                          data-original-title="<%=Validator.hasErrors('comment') ? Validator.getFieldErrors('comment') : ''%>"
+                ><%=Validator.getValue('comment')%></textarea>
+                <span class="help-block">
+                    Пожалуйста укажите особенности или нюансы перевозки,
+                    во избежания возникновения проблем на месте эвакуации
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-9 col-lg-offset-3">
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

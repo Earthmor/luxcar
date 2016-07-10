@@ -1,0 +1,28 @@
+<div class="navbar-header">
+    <button type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar">
+        <span class="sr-only">Развернуть меню</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">ELEPHANT</a>
+</div>
+<div id="navbar" class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li class="<%= route == '/services' && 'active' || '' %>"><a href="/services">Услуги</a></li>
+        <li class="<%= route == '/price' && 'active' || '' %>"><a href="/price">Цены</a></li>
+        <li class="<%= route == '/contact' && 'active' || '' %>"><a href="/contact">Контакты</a></li>
+        <li class="<%= route == '/feedback' && 'active' || '' %>"><a href="/feedback">Отзывы</a></li>
+        <li class="<%= route == '/portfolio' && 'active' || '' %>"><a href="/portfolio">Наша работа</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="<%= route == '/offer' && 'active' || '' %>">
+            <a href="/offer">Оставьте заявку на эвакуацию</a>
+        </li>
+    </ul>
+</div>

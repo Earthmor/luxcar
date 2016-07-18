@@ -106,10 +106,27 @@ router.post('/offer', function(req, res, next) {
             escapeHTML: false
         });
 
-    req.Validator.getErrors(function(errors){
-        console.log(errors);
-        console.log(req.url);
-        res.render('offer', { title: 'ELEPHANT|Эвакуатор|Ремонт', route: req.url, errors: errors});
+    req.Validator.getErrors(function(errors) {
+        if(errors.length > 0) {
+            res.render('offer', {title: 'ELEPHANT|Эвакуатор|Ремонт', route: req.url, errors: errors});
+        } else {
+            console.log('all done');
+            res.mailer.send('mail/offer_email.ejs', {
+                to: 'artiom.budnikoff@yandex.ru',
+                subject: 'Test Email',
+                otherProperty: 'Other Property'
+            }, function (err) {
+                if (err) {
+                    console.log(err);
+                    res.send('There was an error sending the email');
+                    return;
+                }
+                //todo need handel
+                res.send('Email Sent');
+            });
+            console.log('email sended');
+            res.render('offer', {title: 'ELEPHANT|Эвакуатор|Ремонт', route: req.url});
+        }
     });
 });
 

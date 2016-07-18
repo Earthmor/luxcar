@@ -11,6 +11,7 @@
     "debug": "~2.2.0",
     "ejs": "~2.3.3",
     "express": "~4.13.1",
+    "express-mailer": "0.3.1",
     "ejs-mate": "2.3.x",
     "less-middleware": "1.0.x",
     "morgan": "~1.6.1",

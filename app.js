@@ -1,4 +1,5 @@
 var express = require('express');
+var mailer = require('express-mailer');
 var i18n = require('i18n');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -31,7 +32,18 @@ i18n.configure({
 });
 app.use(i18n.init);
 
-
+// #SETTING MAIL
+mailer.extend(app, {
+  from: 'by.metran@gmail.com',
+  host: 'smtp.gmail.com',
+  secureConnection: true,
+  port: 465,
+  transportMethod: 'SMTP',
+  auth: {
+    user: 'by.metran@gmail.com',
+    pass: '10049116kain'
+  }
+});
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

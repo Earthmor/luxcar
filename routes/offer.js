@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/offer', function(req, res, next) {
-    res.render('offer', { title: 'ELEPHANT|Эвакуатор|Ремонт', route: req.url});
+router.get('/offer', function (req, res, next) {
+    res.render('offer', {title: 'ELEPHANT|Эвакуатор|Ремонт', route: req.url});
 });
 
-router.post('/offer', function(req, res, next) {
+router.post('/offer', function (req, res, next) {
     req.Validator
-        .validate('mark', {
+        .validate('mark', req.__('mark.displayName'), {
             required: true,
             length: {
                 min: 4,
@@ -18,7 +18,7 @@ router.post('/offer', function(req, res, next) {
             stripTags: false,
             escapeHTML: false
         })
-        .validate('weight', {
+        .validate('weight', req.__('weight.displayName'), {
             required: true,
             length: {
                 min: 4,
@@ -28,7 +28,7 @@ router.post('/offer', function(req, res, next) {
             stripTags: false,
             escapeHTML: false
         })
-        .validate('from', {
+        .validate('from', req.__('from.displayName'), {
             required: true,
             length: {
                 min: 4,
@@ -38,7 +38,7 @@ router.post('/offer', function(req, res, next) {
             stripTags: false,
             escapeHTML: false
         })
-        .validate('to', {
+        .validate('to', req.__('to.displayName'), {
             required: true,
             length: {
                 min: 4,
@@ -48,7 +48,7 @@ router.post('/offer', function(req, res, next) {
             stripTags: false,
             escapeHTML: false
         })
-        .validate('dateCarriage', {
+        .validate('dateCarriage', req.__('dateCarriage.displayName'), {
             required: true,
             length: {
                 min: 16,
@@ -58,7 +58,7 @@ router.post('/offer', function(req, res, next) {
             stripTags: false,
             escapeHTML: false
         })
-        .validate('fio', {
+        .validate('fio', req.__('fio.displayName'), {
             required: true,
             length: {
                 min: 4,
@@ -68,7 +68,7 @@ router.post('/offer', function(req, res, next) {
             stripTags: false,
             escapeHTML: false
         })
-        .validate('phone', {
+        .validate('phone', req.__('phone.displayName'), {
             required: true,
             length: {
                 min: 10,
@@ -78,7 +78,7 @@ router.post('/offer', function(req, res, next) {
             stripTags: false,
             escapeHTML: false
         })
-        .validate('email', {
+        .validate('email', req.__('email.displayName'), {
             required: false,
             length: {
                 min: 0,
@@ -89,13 +89,13 @@ router.post('/offer', function(req, res, next) {
             stripTags: false,
             escapeHTML: false
         })
-        .validate('optionsPriority', {
+        .validate('optionsPriority', req.__('optionsPriority.displayName'), {
             required: false
         }).filter('optionsPriority', {
             stripTags: false,
             escapeHTML: false
         })
-        .validate('comment', {
+        .validate('comment', req.__('comment.displayName'), {
             required: false,
             length: {
                 min: 0,
@@ -106,8 +106,8 @@ router.post('/offer', function(req, res, next) {
             escapeHTML: false
         });
 
-    req.Validator.getErrors(function(errors) {
-        if(errors.length > 0) {
+    req.Validator.getErrors(function (errors) {
+        if (errors.length > 0) {
             res.render('offer', {title: 'ELEPHANT|Эвакуатор|Ремонт', route: req.url, errors: errors});
         } else {
             console.log('all done');

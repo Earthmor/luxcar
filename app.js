@@ -54,7 +54,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // #VALIDATE FORM
 var validationConfig = {
-  stripTags : true
+  stripTags : true,
+  i18n: {
+    directory: __dirname + '/locales',
+    defaultLocale: 'ru'
+  }
 };
 app.use(validate(app, validationConfig));
 

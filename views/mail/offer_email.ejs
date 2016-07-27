@@ -1,28 +1,58 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title><%= subject %></title>
 </head>
-<body>
-<h1>Lorem ipsum</h1>
-<p>
-    <strong>
-        Lorem ipsum dolor:
-        | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua.
-        <br>
-        |Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </strong>
-</p>
-<h2>Lorem ipsum</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat.</p>
-<p>Lorem ipsum:</p>
-<ol>
-    <li>Lorem ipsum dolor</li>
-    <li>Lorem ipsum dolor</li>
-    <li>Lorem ipsum dolor</li>
-</ol>
+
+<body bgcolor="#FFFFFF">
+<h3>Заявка на эвакуацию от <%= fio %></h3>
+<form class="form-horizontal" method="post" action="">
+    <fieldset>
+        <legend></legend>
+        <div>
+            <label for="inputMark">Марка транспортного средства</label>
+            <input type="text" id="inputMark" readonly value="<%= mark %>">
+        </div>
+        <div>
+            <label for="inputWeight">Вес автотранспортного средства</label>
+            <input type="text" id="inputWeight" readonly value="<%= weight %>">
+        </div>
+        <div>
+            <label for="inputFrom">Откуда</label>
+            <input type="text" id="inputFrom" readonly value="<%= whereFrom %>">
+        </div>
+        <div>
+            <label for="inputTo">Куда</label>
+           <input type="text" id="inputTo" readonly value="<%= whereTo %>">
+        </div>
+        <div>
+            <label for="dateCarriage">Дата перевозки</label>
+            <input type='text' id="dateCarriage" readonly value="<%= dateCarriage %>">
+        </div>
+        <div>
+            <label for="inputFIO">ФИО</label>
+            <input type="text" id="inputFIO" readonly value="<%= fio %>">
+        </div>
+        <div>
+            <label for="inputPhone">Телефон</label>
+            <input id="inputPhone" type="text" readonly value="<%= phone %>">
+        </div>
+        <div>
+            <label for="inputEmail">Email</label>
+            <input type="text" id="inputEmail" readonly value="<%= email %>">
+        </div>
+        <div>
+            <label for="optionsPriority">Приоритет</label>
+            <input id="optionsPriority" readonly value="<%= optionsPriority %>">
+        </div>
+
+        <div>
+            <label for="comment">Особенности Вашей перевозки</label>
+            <textarea id="comment" readonly><%= comment %></textarea>
+        </div>
+    </fieldset>
+</form>
 </body>
 </html>

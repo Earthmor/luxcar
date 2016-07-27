@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+/* GET offer page. */
 router.get('/offer', function (req, res, next) {
     res.render('offer', {title: 'ELEPHANT|Эвакуатор|Ремонт', route: req.url});
 });
@@ -113,16 +113,25 @@ router.post('/offer', function (req, res, next) {
             console.log('all done');
             res.mailer.send('mail/offer_email.ejs', {
                 to: 'artiom.budnikoff@yandex.ru',
-                subject: 'Test Email',
-                otherProperty: 'Other Property'
+                subject: 'Заявка на эвакуацию [' + req.Validator.getValue('fio') + ']',
+                mark: req.Validator.getValue('mark'),
+                weight: req.Validator.getValue('weight'),
+                whereFrom: req.Validator.getValue('from'),
+                whereTo: req.Validator.getValue('to'),
+                dateCarriage: req.Validator.getValue('dateCarriage'),
+                fio: req.Validator.getValue('fio'),
+                phone: req.Validator.getValue('phone'),
+                email: req.Validator.getValue('email'),
+                optionsPriority: req.Validator.getValue('optionsPriority'),
+                comment: req.Validator.getValue('comment')
             }, function (err) {
                 if (err) {
                     console.log(err);
-                    res.send('There was an error sending the email');
+                    // res.send('There was an error sending the email');
                     return;
                 }
                 //todo need handel
-                res.send('Email Sent');
+                // res.send('Email Sent');
             });
             console.log('email sended');
             res.render('offer', {title: 'ELEPHANT|Эвакуатор|Ремонт', route: req.url});

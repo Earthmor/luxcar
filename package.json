@@ -17,7 +17,8 @@
     "morgan": "1.7.0",
     "serve-favicon": "2.3.0",
     "form-validate": "latest",
-    "i18n": "latest"
+    "i18n": "latest",
+    "properties-reader": "0.0.15"
   },
   "devDependencies": {
     "mocha": "2.5.3",

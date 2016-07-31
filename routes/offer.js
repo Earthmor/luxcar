@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET offer page. */
 router.get('/offer', function (req, res, next) {
-    res.render('offer', {title: 'ELEPHANT|Эвакуатор|Ремонт', route: req.url});
+    res.render('offer', {title: 'ELEPHANT|Эвакуатор|Ремонт', route: req.url, state: {}});
 });
 
 router.post('/offer', function (req, res, next) {
@@ -108,9 +108,13 @@ router.post('/offer', function (req, res, next) {
 
     req.Validator.getErrors(function (errors) {
         if (errors.length > 0) {
-            res.render('offer', {title: 'ELEPHANT|Эвакуатор|Ремонт', route: req.url, errors: errors});
+            res.render('offer', {
+                title: 'ELEPHANT|Эвакуатор|Ремонт',
+                route: req.url,
+                errors: errors,
+                state: {}
+            });
         } else {
-            console.log('all done');
             res.mailer.send('mail/offer_email.ejs', {
                 to: 'artiom.budnikoff@yandex.ru',
                 subject: 'Заявка на эвакуацию [' + req.Validator.getValue('fio') + ']',
@@ -127,14 +131,23 @@ router.post('/offer', function (req, res, next) {
             }, function (err) {
                 if (err) {
                     console.log(err);
-                    // res.send('There was an error sending the email');
-                    return;
+                    res.render('offer', {
+                        title: 'ELEPHANT|Эвакуатор|Ремонт',
+                        route: req.url,
+                        state: {
+                            error: err
+                        }
+                    });
+                } else {
+                    res.render('offer', {
+                        title: 'ELEPHANT|Эвакуатор|Ремонт',
+                        route: req.url,
+                        state: {
+                            success: req.Properties.get('messages.offer.send.success')
+                        }
+                    });
                 }
-                //todo need handel
-                // res.send('Email Sent');
             });
-            console.log('email sended');
-            res.render('offer', {title: 'ELEPHANT|Эвакуатор|Ремонт', route: req.url});
         }
     });
 });

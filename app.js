@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var engine = require('ejs-mate');
 var validate = require('form-validate');
+var propertiesReader = require('properties-reader');
 
 // #ROUTES
 var routes = require('./routes/index');
@@ -77,7 +78,8 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// #ERROR HANDLERS
+
+// #HANDLERS
 
 // #DEVELOPMENT ERROR HANDLER
 // #WILL PRINT STACKTRACE
@@ -103,6 +105,13 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   });
+});
+
+// #PROPERTIES HANDLER
+app.use(function(req, res, next) {
+    req.Properties = propertiesReader('./resource/properties.file');
+    res.locals.Properties = req.Properties;
+    next();
 });
 
 

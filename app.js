@@ -17,6 +17,7 @@ var price = require('./routes/price');
 var contact = require('./routes/contact');
 var portfolio = require('./routes/portfolio');
 var offer = require('./routes/offer');
+var calculate = require('./routes/calculate');
 
 var app = express();
 
@@ -63,13 +64,14 @@ var validationConfig = {
 };
 app.use(validate(app, validationConfig));
 
-// #BIND ROUTES todo split all routes
+// #BIND ROUTES
 app.use('/', routes);
 app.use('/', services);
 app.use('/', price);
 app.use('/', contact);
 app.use('/', portfolio);
 app.use('/', offer);
+app.use('/', calculate);
 
 // #CATCH 404 AND FORWARD TO ERROR HANDLER
 app.use(function(req, res, next) {
@@ -113,6 +115,5 @@ app.use(function(req, res, next) {
     res.locals.Properties = req.Properties;
     next();
 });
-
 
 module.exports = app;

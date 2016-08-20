@@ -143,7 +143,7 @@ router.post('/offer', function (req, res, next) {
                         title: 'ELEPHANT|Эвакуатор|Ремонт',
                         route: req.url,
                         state: {
-                            success: req.Properties.get('messages.offer.send.success')
+                            success: req.Messages.get('offer.send.success')
                         }
                     });
                 }

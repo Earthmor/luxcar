@@ -5,30 +5,26 @@
     <fieldset>
         <div class="col-xs-6 form-group">
             <label class="col-lg-3 control-label" for="srcAddress">Откуда:</label>
-            <div class="col-lg-9">
+            <div class="input-group col-lg-9" style="padding: 0 15px">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
                 <input class="form-control" id="srcAddress" type="text">
+                <span class="input-group-btn">
+                    <button type="button" id="srcButton" class="btn btn-default pull-right">Отметить</button>
+                </span>
             </div>
         </div>
         <div class="col-xs-6 form-group">
             <label class="col-lg-3 control-label" for="dstAddress">Куда:</label>
-            <div class="col-lg-9">
+            <div class="input-group col-lg-9" style="padding: 0 15px">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
                 <input class="form-control" id="dstAddress" type="text">
+                <span class="input-group-btn">
+                    <button type="button" id="dstButton" class="btn btn-default pull-right">Отметить</button>
+                </span>
             </div>
         </div>
         <div class="col-xs-6 form-group">
-            <label class="col-lg-3 control-label" for="srcButton">Отметить:</label>
-            <div class="col-lg-9">
-                <button type="button" id="srcButton" class="btn btn-default pull-right">Отметить</button>
-            </div>
-        </div>
-        <div class="col-xs-6 form-group">
-            <label class="col-lg-3 control-label" for="dstButton">Отметить:</label>
-            <div class="col-lg-9">
-                <button type="button" id="dstButton" class="btn btn-default pull-right">Отметить</button>
-            </div>
-        </div>
-        <div class="col-xs-4 form-group">
-            <label class="col-lg-3 control-label" for="vehicleWeight">Масса автомобиля:</label>
+            <label class="col-lg-3 control-label" for="vehicleWeight">Масса а/м:</label>
             <div class="col-lg-9">
                 <select class="form-control" id="vehicleWeight">
                     <option value="0">До 1000 кг</option>
@@ -37,31 +33,30 @@
                     <option value="3">До 2500 кг</option>
                     <option value="4">До 3500 кг</option>
                 </select>
-            </div>
-        </div>
-        <div class="col-xs-4 form-group">
-            <div class="checkbox">
-                <label class="col-lg-3 control-label" for="nigthRate">Ночной тариф</label>
-                <div class="col-lg-9">
-                    <input type="checkbox" id="nigthRate">
+                <div class="checkbox">
+                    <label class="col-lg-6 control-label pull-right"><input type="checkbox" id="nigthRate">Ночной тариф</label>
                 </div>
             </div>
         </div>
         <div class="col-xs-12 form-group">
             <button type="button" id="calcButton" class="btn btn-success pull-right">Расчитать</button>
         </div>
-        <hr class="col-xs-12">
-        <div id="map" style="width: 100%; height: 500px;"></div>
-        <!--<div class="col-xs-6 form-group">-->
-            <!--<label for="fullName">Ваше имя:</label>-->
-            <!--<input type="text" name="fullName" id="fullName">-->
-            <!--<label for="phone">Контактный телефон:</label>-->
-            <!--<input type="text" name="phone" id="phone">-->
-            <!--<label for="comment">Комментарий:</label>-->
-            <!--<br>-->
-            <!--<textarea name="comment" id="comment"></textarea>-->
-            <!--<button class="btn btn-primary">Заказать</button>-->
-        <!--</div>-->
-        <hr class="col-xs-12">
+        <div class="col-xs-12 form-group">
+            <hr class="col-xs-12">
+        </div>
     </fieldset>
 </form>
+<div id="map" style="width: 100%; height: 500px;"></div>
+<div >
+<label for="fullName">Ваше имя:</label>
+<input type="text" name="fullName" id="fullName">
+<label for="phone">Контактный телефон:</label>
+<input type="text" name="phone" id="phone">
+<label for="comment">Комментарий:</label>
+<br>
+<textarea name="comment" id="comment"></textarea>
+<button class="btn btn-primary">Заказать</button>
+</div>
+<div class="col-xs-12 form-group">
+<hr class="col-xs-12">
+</div>

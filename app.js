@@ -25,6 +25,8 @@ var app = express();
 app.engine('ejs', engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// #SETTING FAVICON
 app.use(favicon(path.join(__dirname, 'public/images/favicon', 'favicon.ico')));
 
 // #SETTING LOCALES
@@ -111,8 +113,8 @@ app.use(function(err, req, res, next) {
 
 // #PROPERTIES HANDLER
 app.use(function(req, res, next) {
-    req.Properties = propertiesReader('./resource/properties.file');
-    res.locals.Properties = req.Properties;
+    req.Messages = propertiesReader('./resource/messages.file');
+    res.locals.Messages = req.Messages;
     next();
 });
 

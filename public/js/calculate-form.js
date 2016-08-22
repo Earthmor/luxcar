@@ -1,7 +1,7 @@
 ymaps.ready(function init() {
     var map = new ymaps.Map('map',
         {
-            center: [53.763986,91.414146],
+            center: [53.707303,91.696818],
             zoom: 10,
             minZoom: 3,
             behaviors: ['default', 'scrollZoom']
@@ -124,7 +124,12 @@ ymaps.ready(function init() {
             map.geoObjects.remove(lastRoute);
         }
 
-        $.calcroute.totals([from, to], trafficGeometry, $('#vehicleWeight').val(), $('#nightlyRate').is(':checked')).done(function (route, routeTotals) {
+        $.calcroute.totals(
+            [from, to],
+            trafficGeometry,
+            $('#vehicleWeight').val(),
+            $('#nightlyRate').is(':checked')
+        ).done(function (route, routeTotals) {
             var path = route.getPaths().get(0);
 
             lastRoute = route;
@@ -144,20 +149,15 @@ ymaps.ready(function init() {
             if (path && path.geometry) {
                 map.setBounds(path.geometry.getBounds());
             }
-
-            $('#calcResults .distance').html(routeTotals.routeLength.toFixed(2) + 'км');
-            $('#calcResults .distance-from-kad').html(routeTotals.distanceFromCity.toFixed(2) + 'км');
-            $('#calcResults .time').html(routeTotals.humanTime);
-            $('#calcResults .price').html(Math.ceil(routeTotals.price));
-
-            $('#calcResults').show();
-
-            $('#resultDetailsKm .givingFee').html(routeTotals.givingFee);
-            $('#resultDetailsKm .regionGivingFee').html(routeTotals.regionGivingFee);
-            $('#resultDetailsKm .kmFee').html(routeTotals.extraKmDistance.toFixed(2) + "x" + routeTotals.kmFee);
-            $('#resultDetailsKm .nightlyFee').html(routeTotals.nightlyFee);
-            $('#resultDetailsKm .total').html(Math.ceil(routeTotals.price));
-            $('#resultDetailsKm').show();
+            console.dir('routeTotals: ' + routeTotals);
+            $.calcroute.showCalcResult(routeTotals);
         });
+    });
+    //BIND OFFER SUBMIT HANDLER
+    $('#offerForm').submit(function(){
+        var offerForm = $('#offerForm');
+        offerForm.find('#from').val($('#srcAddress').val());
+        offerForm.find('#to').val($('#dstAddress').val());
+        offerForm.find('#weight').val($('#vehicleWeight option:selected').text());
     });
 });

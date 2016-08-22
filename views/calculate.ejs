@@ -27,11 +27,8 @@
             <label class="col-lg-3 control-label" for="vehicleWeight">Масса а/м:</label>
             <div class="col-lg-9">
                 <select class="form-control" id="vehicleWeight">
-                    <option value="0">До 1000 кг</option>
-                    <option value="1">До 1500 кг</option>
-                    <option value="2">До 2000 кг</option>
-                    <option value="3">До 2500 кг</option>
-                    <option value="4">До 3500 кг</option>
+                    <option value="0">До 3000 кг</option>
+                    <option value="1">Более 3000 кг</option>
                 </select>
                 <div class="checkbox">
                     <label class="col-lg-6 control-label pull-right"><input type="checkbox" id="nigthRate">Ночной тариф</label>
@@ -47,16 +44,80 @@
     </fieldset>
 </form>
 <div id="map" style="width: 100%; height: 500px;"></div>
-<div >
-<label for="fullName">Ваше имя:</label>
-<input type="text" name="fullName" id="fullName">
-<label for="phone">Контактный телефон:</label>
-<input type="text" name="phone" id="phone">
-<label for="comment">Комментарий:</label>
-<br>
-<textarea name="comment" id="comment"></textarea>
-<button class="btn btn-primary">Заказать</button>
+<hr>
+<div id="calcResults" style="display: none">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="active">
+            <td>Подача</td>
+            <td class="givingFee">
+        <tr class="active">
+            <td>Подача за город</td>
+            <td class="regionGivingFee"></td>
+        </tr>
+        <tr class="active">
+            <td>Транспортировка за городом свыше 20 км</td>
+            <td class="kmFee"></td>
+        </tr>
+        <tr class="active">
+            <td>Ночной тариф</td>
+            <td class="nightlyFee"></td>
+        </tr>
+        <tr class="active">
+            <td>Расстояние</td>
+            <td class="distance"></td>
+        </tr>
+        <tr class="active">
+            <td>Время</td>
+            <td class="time"></td>
+        </tr>
+        <tr class="success" style="font-weight: bold">
+            <td>Итого:</td>
+            <td class="total"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="alert alert-dismissible alert-info" id="warning-calc">
+        <sup>*</sup> стоимость указана приблизительная, точную сумму Вы можете уточнить у оператора
+    </div>
 </div>
-<div class="col-xs-12 form-group">
-<hr class="col-xs-12">
-</div>
+<form class="form-horizontal" id="offerForm" method="post" action="offer">
+    <fieldset>
+        <input type="hidden" name="from" id="from">
+        <input type="hidden" name="to" id="to">
+        <input type="hidden" name="weight" id="weight">
+        <div class="col-xs-12 form-group">
+            <hr class="col-xs-12">
+        </div>
+        <div class="col-xs-12 form-group">
+            <label class="col-lg-3 control-label" for="fullName">Ваше имя:</label>
+            <div class="col-lg-9">
+                <input class="form-control" type="text" name="fio" id="fio" placeholder="Ваше имя">
+            </div>
+        </div>
+        <div class="col-xs-12 form-group">
+            <label class="col-lg-3 control-label" for="phone">Контактный телефон:</label>
+            <div class="col-lg-9">
+                <input class="form-control bfh-phone" type="text" name="phone" id="phone"
+                       data-format="+7 (ddd) ddd-dddd" placeholder="Контактный телефон">
+            </div>
+        </div>
+        <div class="col-xs-12 form-group">
+            <label class="col-lg-3 control-label" for="comment">Комментарий:</label>
+            <div class="col-lg-9">
+                <textarea class="form-control" name="comment" id="comment"></textarea>
+            </div>
+        </div>
+        <div class="col-xs-12 form-group">
+            <div class="col-lg-9 col-lg-offset-3">
+                <button type="submit" class="btn btn-primary">Заказать</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

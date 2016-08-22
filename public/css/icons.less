@@ -1,0 +1,17 @@
+@import "variables";
+
+.@{lc-css-prefix}-icon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings', serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+
+}
+.@{lc-css-prefix}-calc-icon:before {
+  content: @lc-var-calc;
+  margin-right: 5px;
+}

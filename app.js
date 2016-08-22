@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var engine = require('ejs-mate');
 var validate = require('form-validate');
+var propertiesReader = require('properties-reader');
 
 // #ROUTES
 var routes = require('./routes/index');
@@ -16,6 +17,7 @@ var price = require('./routes/price');
 var contact = require('./routes/contact');
 var portfolio = require('./routes/portfolio');
 var offer = require('./routes/offer');
+var calculate = require('./routes/calculate');
 
 var app = express();
 
@@ -23,6 +25,8 @@ var app = express();
 app.engine('ejs', engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// #SETTING FAVICON
 app.use(favicon(path.join(__dirname, 'public/images/favicon', 'favicon.ico')));
 
 // #SETTING LOCALES
@@ -54,17 +58,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // #VALIDATE FORM
 var validationConfig = {
-  stripTags : true
+  stripTags : true,
+  i18n: {
+    directory: __dirname + '/locales',
+    defaultLocale: 'ru'
+  }
 };
 app.use(validate(app, validationConfig));
 
-// #BIND ROUTES todo split all routes
+// #BIND ROUTES
 app.use('/', routes);
 app.use('/', services);
 app.use('/', price);
 app.use('/', contact);
 app.use('/', portfolio);
 app.use('/', offer);
+app.use('/', calculate);
 
 // #CATCH 404 AND FORWARD TO ERROR HANDLER
 app.use(function(req, res, next) {
@@ -73,7 +82,8 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// #ERROR HANDLERS
+
+// #HANDLERS
 
 // #DEVELOPMENT ERROR HANDLER
 // #WILL PRINT STACKTRACE
@@ -101,5 +111,11 @@ app.use(function(err, req, res, next) {
   });
 });
 
+// #PROPERTIES HANDLER
+app.use(function(req, res, next) {
+    req.Messages = propertiesReader('./resource/messages.file');
+    res.locals.Messages = req.Messages;
+    next();
+});
 
 module.exports = app;

@@ -1,1 +1,24 @@
-{}
+{
+	"length.tooShort": "Поле %s слишком короткое (Допустимо минимум %d символов)",
+	"length.tooLong": "Поле %s слишком длинное (Допустимо максимум %d смволов)",
+	"alphaNumeric.isNotAlphaNumeric": "Поле %s может содержать только буквенно-цифровые символы",
+	"numeric.isNotNumeric": "Поле %s может содержать только цифры",
+	"alpha.isNotAlpha": "Поле %s может содержать только буквенные символы (А-Я;A-Z)",
+	"required.missing": "Поле %s является обязательным для заполнения",
+	"integer.isNoInteger": "Поле %s может содержать только целые числа",
+	"decimal.isNoDecimal": "Поле %s может содержать только десятичные",
+	"between.isNotNumeric": "Поле %s может содержать только цифры",
+	"between.notInRange": "Поле %s может содержать только цифры от %d до %d",
+	"between.tooBig": "Поле %s может содержать только цифры ниже %d",
+	"email.invalid": "Поле %s требуется действительный адрес электронной почты",
+	"mark.displayName": "Марка транспортного средства",
+	"weight.displayName": "Вес автотранспортного средства",
+	"from.displayName": "Откуда",
+	"to.displayName": "Куда",
+	"dateCarriage.displayName": "Дата перевозки",
+	"fio.displayName": "ФИО",
+	"phone.displayName": "Телефон",
+	"email.displayName": "Email",
+	"optionsPriority.displayName": "Приоритет",
+	"comment.displayName": "Особенности Вашей перевозки"
+}

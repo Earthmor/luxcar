@@ -1,20 +1,20 @@
 ymaps.ready(function init() {
     var map = new ymaps.Map('map',
         {
-            center: [0, 0], /*59.9470, 30.1309*/
+            center: [53.707303,91.696818],
             zoom: 10,
             minZoom: 3,
             behaviors: ['default', 'scrollZoom']
         }),
         mapCursor,
-        kadPolygon = new ymaps.Polygon(([spbKad]), {}, {
+        trafficPolygon = new ymaps.Polygon(([trafficBorder]), {}, {
             editorDrawingCursor: "crosshair",
             editorMaxPoints: 1000,
             fill: false,
             strokeColor: '#00ff00',
             strokeWidth: 2
         }),
-        kadGeometry = kadPolygon.geometry,
+        trafficGeometry = trafficPolygon.geometry,
         lastRoute = undefined,
         searchTarget = false,
         srcPlacemark = undefined,
@@ -32,8 +32,8 @@ ymaps.ready(function init() {
         .add('zoomControl', {left: 5, top: 40})
         .add('mapTools', {left: 35, top: 5});
 
-    map.geoObjects.add(kadPolygon);
-    map.setBounds(kadPolygon.geometry.getBounds());
+    map.geoObjects.add(trafficPolygon);
+    map.setBounds(trafficPolygon.geometry.getBounds());
 
     map.events.add('click', function (e) {
         var coords = e.get('coordPosition'), placemark;
@@ -82,14 +82,14 @@ ymaps.ready(function init() {
                 $('#calcButton').click();
             }
         }).focus(function () {
-        searchTarget = false;
-        if (mapCursor) {
-            mapCursor.remove();
-            mapCursor = undefined;
-        }
-        $('#map').removeClass('active');
-        $('#srcButton, #dstButton').removeClass('ui-state-active');
-    });
+            searchTarget = false;
+            if (mapCursor) {
+                mapCursor.remove();
+                mapCursor = undefined;
+            }
+            $('#map').removeClass('active');
+            $('#srcButton, #dstButton').removeClass('ui-state-active');
+        });
 
     $('#srcButton').click(function (e) {
         mapCursor = mapCursor || map.cursors.push('arrow');
@@ -124,7 +124,12 @@ ymaps.ready(function init() {
             map.geoObjects.remove(lastRoute);
         }
 
-        $.calcroute.totals([from, to], kadGeometry, $('#vehicleWeight').val(), $('#nightlyRate').is(':checked')).done(function (route, routeTotals) {
+        $.calcroute.totals(
+            [from, to],
+            trafficGeometry,
+            $('#vehicleWeight').val(),
+            $('#nightlyRate').is(':checked')
+        ).done(function (route, routeTotals) {
             var path = route.getPaths().get(0);
 
             lastRoute = route;
@@ -144,20 +149,15 @@ ymaps.ready(function init() {
             if (path && path.geometry) {
                 map.setBounds(path.geometry.getBounds());
             }
-
-            $('#calcResults .distance').html(routeTotals.routeLength.toFixed(2) + 'км');
-            $('#calcResults .distance-from-kad').html(routeTotals.distanceFromCity.toFixed(2) + 'км');
-            $('#calcResults .time').html(routeTotals.humanTime);
-            $('#calcResults .price').html(Math.ceil(routeTotals.price));
-
-            $('#calcResults').show();
-
-            $('#resultDetailsKm .givingFee').html(routeTotals.givingFee);
-            $('#resultDetailsKm .regionGivingFee').html(routeTotals.regionGivingFee);
-            $('#resultDetailsKm .kmFee').html(routeTotals.extraKmDistance.toFixed(2) + "x" + routeTotals.kmFee);
-            $('#resultDetailsKm .nightlyFee').html(routeTotals.nightlyFee);
-            $('#resultDetailsKm .total').html(Math.ceil(routeTotals.price));
-            $('#resultDetailsKm').show();
+            console.dir('routeTotals: ' + routeTotals);
+            $.calcroute.showCalcResult(routeTotals);
         });
+    });
+    //BIND OFFER SUBMIT HANDLER
+    $('#offerForm').submit(function(){
+        var offerForm = $('#offerForm');
+        offerForm.find('#from').val($('#srcAddress').val());
+        offerForm.find('#to').val($('#dstAddress').val());
+        offerForm.find('#weight').val($('#vehicleWeight option:selected').text());
     });
 });

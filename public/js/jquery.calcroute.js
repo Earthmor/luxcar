@@ -6,7 +6,7 @@ jQuery.extend({
                 droute = new $.Deferred(),
                 dfrom = new $.Deferred(),
                 dto = new $.Deferred(),
-                cityCenter = '59.941, 30.331';
+                cityCenter = '53.705,91.699';
             retval = {
                 totalDistance: 0,
                 extraKmDistance: 0,
@@ -26,11 +26,8 @@ jQuery.extend({
             nightlyFee = 500;
             overtimeFee = 400;
             rates = [
-                [1400, 35],
-                [1300, 40],
-                [1400, 45],
-                [1500, 50],
-                [1800, 55]
+                [1000, 40],
+                [1200, 45]
             ];
             regionGivingFee = [200, 300, 500, 1000];
             rate = rates[vehicleWeight];
@@ -103,15 +100,13 @@ jQuery.extend({
                 if (s == 0 && cityGeometry.contains(coords[0])) {
                     retval.fromCity = true;
                 }
-                if (kkk && segment.getStreet() == 'КАД') {
-                    retval.cityDistance += segment.getLength();		// segment is inside KAD
-                } else if (cityGeometry.contains(coords[0]) && cityGeometry.contains(coords[coords.length - 1])) {
-                    retval.cityDistance += segment.getLength();		// segment is inside KAD
+                if (cityGeometry.contains(coords[0]) && cityGeometry.contains(coords[coords.length - 1])) {
+                    retval.cityDistance += segment.getLength();		// segment is inside border
                 } else if (!cityGeometry.contains(coords[0]) && !cityGeometry.contains(coords[coords.length - 1])) {
-                    retval.regionDistance += segment.getLength();	// segment is outside KAD
+                    retval.regionDistance += segment.getLength();	// segment is outside border
                 } else {
                     var tmpRegionLength = 0;
-                    if (cityGeometry.contains(coords[0])) {			// segment is partially inside/outside KAD
+                    if (cityGeometry.contains(coords[0])) {			// segment is partially inside/outside border
                         coords = coords.reverse();
                     }
                     for (var c = 0, coordCount = coords.length; c < coordCount; c++) {
@@ -131,6 +126,20 @@ jQuery.extend({
             retval.regionDistance /= 1000;
 
             return retval;
+        },
+
+        showCalcResult: function(routeTotals){
+            var $calcResults = $('#calcResults'), $calcResultTbl = $calcResults.find('table');
+            $calcResultTbl.find('.distance').html(routeTotals.routeLength.toFixed(2) + 'км');
+            $calcResultTbl.find('.distance-from-city').html(routeTotals.distanceFromCity.toFixed(2) + 'км');
+            $calcResultTbl.find('.time').html(routeTotals.humanTime);
+            $calcResultTbl.find('.givingFee').html(routeTotals.givingFee + 'р.');
+            $calcResultTbl.find('.regionGivingFee').html(routeTotals.regionGivingFee + 'р.');
+            $calcResultTbl.find('.kmFee').html(routeTotals.extraKmDistance.toFixed(2) + "x" + routeTotals.kmFee);
+            $calcResultTbl.find('.nightlyFee').html(routeTotals.nightlyFee + 'р.');
+            $calcResultTbl.find('.total').html(Math.ceil(routeTotals.price));
+
+            $calcResults.show();
         }
     }
 });
